@@ -1,13 +1,13 @@
-name: testaction
+name: Test Java
 
-on: 
+on:
   push:
     branches:
       - main
   pull_request:
 
 jobs:
-  build-and-test:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,14 +20,5 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-      - name: Cache Maven packages
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-
-      - name: Build and run tests
-        run: mvn clean test
+      - name: Run tests
+        run: mvn test
