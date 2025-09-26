@@ -1,6 +1,12 @@
 name: Test Java
 
-on: push
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -17,4 +23,5 @@ jobs:
           java-version: '21'
 
       - name: Run tests
+        working-directory: Test/miapp
         run: mvn test
