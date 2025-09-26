@@ -1,13 +1,9 @@
 name: Test Java
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
+on: push
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
