@@ -8,7 +8,7 @@ class AppTest {
     @Test
     void testSumaCorrecta() {
         int resultado = App.suma(1, 3);
-        assertEquals(5, resultado, "La suma debería dar 5");
+        assertEquals(4, resultado, "La suma debería dar 5");
     }
 
 }
