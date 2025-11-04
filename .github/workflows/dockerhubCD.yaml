@@ -12,6 +12,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: package
+        working-directory: Test/miapp
+        run: mvn package
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
