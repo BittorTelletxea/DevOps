@@ -3,13 +3,13 @@ name: Dockerhub Continuous Deployment
 on:
   push:
     branches: [ dockercd ]
-    tags: [ 'v*.*.*' ]
 
 jobs:
-  build-and-push:
+  push_dockerhub:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Log in to Docker Hub
@@ -18,22 +18,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Extract Docker metadata (tags & labels)
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ secrets.DOCKERHUB_USER }}/dockercd
-          tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=sha,format=long
+      - name: Build Docker image
+        run: |
+          docker build -f demo/dockerfile -t ${{ secrets.DOCKERHUB_USER }}/dockercd:latest demo
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+      - name: Push Docker image
+        run: docker push ${{ secrets.DOCKERHUB_USER }}/dockercd:latest
