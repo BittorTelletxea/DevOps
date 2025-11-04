@@ -19,7 +19,7 @@ jobs:
           java-version: '21'
 
       - name: package
-        working-directory: Test/miapp
+        working-directory: demo/
         run: mvn package
 
       - name: Log in to Docker Hub
