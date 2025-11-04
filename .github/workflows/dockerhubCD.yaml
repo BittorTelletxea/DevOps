@@ -28,6 +28,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - run: ls demo/target
+      - run: ls
+
       - name: Build Docker image
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USER }}/dockercd:latest demo
