@@ -20,7 +20,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -f demo/Dockerfile -t ${{ secrets.DOCKERHUB_USER }}/dockercd:latest .
+          docker build -f demo/Dockerfile -t ${{ secrets.DOCKERHUB_USER }}/dockercd:latest demo
 
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKERHUB_USER }}/dockercd:latest
